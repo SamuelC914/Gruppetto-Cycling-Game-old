@@ -1,7 +1,8 @@
 
-<link rel="stylesheet"
-href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/
-css/font-awesome.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ImageLoader.min.js"></script>
 <script language="javascript">
   /* Define the Animation class */
   function Animation(frames, img_id, slider_id, interval, loop_select_id){
@@ -141,22 +142,17 @@ css/font-awesome.min.css">
         t.anim_step_reverse();
     }, this.interval);
   }
-  /* Preload Images Function */
-  function preloadImages(frames, callback) {
-    let loaded = 0;
-    const totalFrames = frames.length;
-    const images = [];
-
-    for (let i = 0; i < totalFrames; i++) {
-      images[i] = new Image();
-      images[i].onload = () => {
-        loaded++;
-        if (loaded === totalFrames) {
-          callback(images); // All images are loaded, proceed to initialize the animation
-        }
-      };
-      images[i].src = frames[i];
-    }
+ // GSAP ImageLoader logic
+  function preloadImagesWithGSAP(frames, onComplete) {
+    var loadedImages = [];
+    var loader = gsap.loadImage(frames, {
+      onComplete: function() {
+        onComplete(loadedImages);
+      },
+      onImageLoad: function(image) {
+        loadedImages.push(image.src); // Assuming you want to track loaded image URLs
+      }
+    });
   }
 
   (function() {
@@ -164,16 +160,17 @@ css/font-awesome.min.css">
     var slider_id = "_anim_slider3ec2fa44134441beb58b8764848ff519";
     var loop_select_id = "_anim_loop_select3ec2fa44134441beb58b8764848ff519";
     var frames = [];
-
-    for (var i=0; i<492; i++){
+    for (var i = 0; i < 492; i++) {
       frames[i] = "https://github.com/SamuelC914/Gruppetto-Cycling-Game/blob/main/frame" + ("0000000" + i).slice(-7) + ".png?raw=true";
     }
 
-    // Preload a subset of images before initializing the animation
-    preloadImages(frames.slice(0, 100), function(preloadedImages) {
-      anim3ec2fa44134441beb58b8764848ff519 = new Animation(frames, img_id, slider_id, 142, loop_select_id);
+    // Use GSAP to preload images
+    preloadImagesWithGSAP(frames, function(loadedImages) {
+      // Now loadedImages contains all the preloaded image URLs
+      // Initialize your animation here with the loaded images
+      anim3ec2fa44134441beb58b8764848ff519 = new Animation(loadedImages, img_id, slider_id, 142, loop_select_id);
     });
-  })()
+  })();
 </script>
 
 <div class="animation" align="center">
