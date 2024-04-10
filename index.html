@@ -1,8 +1,7 @@
 
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ScrollTrigger.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.10.4/ImageLoader.min.js"></script>
+<link rel="stylesheet"
+href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/
+css/font-awesome.min.css">
 <script language="javascript">
   /* Define the Animation class */
   function Animation(frames, img_id, slider_id, interval, loop_select_id){
@@ -142,61 +141,32 @@
         t.anim_step_reverse();
     }, this.interval);
   }
- // GSAP ImageLoader logic
-  function preloadImagesWithGSAP(frames, onComplete) {
-    var loadedImages = [];
-    var loader = gsap.loadImage(frames, {
-      onComplete: function() {
-        onComplete(loadedImages);
-      },
-      onImageLoad: function(image) {
-        loadedImages.push(image.src); // Assuming you want to track loaded image URLs
-      }
-    });
-  }
-
-  (function() {
-    var img_id = "_anim_img3ec2fa44134441beb58b8764848ff519";
-    var slider_id = "_anim_slider3ec2fa44134441beb58b8764848ff519";
-    var loop_select_id = "_anim_loop_select3ec2fa44134441beb58b8764848ff519";
-    var frames = [];
-    for (var i = 0; i < 492; i++) {
-      frames[i] = "https://github.com/SamuelC914/Gruppetto-Cycling-Game/blob/main/frame" + ("0000000" + i).slice(-7) + ".png?raw=true";
-    }
-
-    // Use GSAP to preload images
-    preloadImagesWithGSAP(frames, function(loadedImages) {
-      // Now loadedImages contains all the preloaded image URLs
-      // Initialize your animation here with the loaded images
-      anim3ec2fa44134441beb58b8764848ff519 = new Animation(loadedImages, img_id, slider_id, 142, loop_select_id);
-    });
-  })();
 </script>
 
 <div class="animation" align="center">
-    <img id="_anim_img3ec2fa44134441beb58b8764848ff519">
+    <img id="_anim_img7332b0ee15494480b76d2d1e63cb3089">
     <br>
-    <input id="_anim_slider3ec2fa44134441beb58b8764848ff519" type="range" style="width:350px"
+    <input id="_anim_slider7332b0ee15494480b76d2d1e63cb3089" type="range" style="width:350px"
            name="points" min="0" max="1" step="1" value="0"
-           onchange="anim3ec2fa44134441beb58b8764848ff519.set_frame(parseInt(this.value));"></input>
+           onchange="anim7332b0ee15494480b76d2d1e63cb3089.set_frame(parseInt(this.value));"></input>
     <br>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.slower()"><i class="fa fa-minus"></i></button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.first_frame()"><i class="fa fa-fast-backward">
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.slower()"><i class="fa fa-minus"></i></button>
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.first_frame()"><i class="fa fa-fast-backward">
         </i></button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.previous_frame()">
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.previous_frame()">
         <i class="fa fa-step-backward"></i></button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.reverse_animation()">
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.reverse_animation()">
         <i class="fa fa-play fa-flip-horizontal"></i></button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.pause_animation()"><i class="fa fa-pause">
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.pause_animation()"><i class="fa fa-pause">
         </i></button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.play_animation()"><i class="fa fa-play"></i>
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.play_animation()"><i class="fa fa-play"></i>
         </button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.next_frame()"><i class="fa fa-step-forward">
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.next_frame()"><i class="fa fa-step-forward">
         </i></button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.last_frame()"><i class="fa fa-fast-forward">
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.last_frame()"><i class="fa fa-fast-forward">
         </i></button>
-    <button onclick="anim3ec2fa44134441beb58b8764848ff519.faster()"><i class="fa fa-plus"></i></button>
-  <form action="#n" name="_anim_loop_select3ec2fa44134441beb58b8764848ff519" class="anim_control">
+    <button onclick="anim7332b0ee15494480b76d2d1e63cb3089.faster()"><i class="fa fa-plus"></i></button>
+  <form action="#n" name="_anim_loop_select7332b0ee15494480b76d2d1e63cb3089" class="anim_control">
     <input type="radio" name="state"
            value="once" > Once </input>
     <input type="radio" name="state"
@@ -211,12 +181,12 @@
   /* Instantiate the Animation class. */
   /* The IDs given should match those used in the template above. */
   (function() {
-    var img_id = "_anim_img3ec2fa44134441beb58b8764848ff519";
-    var slider_id = "_anim_slider3ec2fa44134441beb58b8764848ff519";
-    var loop_select_id = "_anim_loop_select3ec2fa44134441beb58b8764848ff519";
-    var frames = new Array(492);
+    var img_id = "_anim_img7332b0ee15494480b76d2d1e63cb3089";
+    var slider_id = "_anim_slider7332b0ee15494480b76d2d1e63cb3089";
+    var loop_select_id = "_anim_loop_select7332b0ee15494480b76d2d1e63cb3089";
+    var frames = new Array(265);
     
-  for (var i=0; i<492; i++){
+  for (var i=0; i<265; i++){
     frames[i] = "https://github.com/SamuelC914/Gruppetto-Cycling-Game/blob/main/frame" + ("0000000" + i).slice(-7) +
                 ".png?raw=true";
   }
@@ -225,7 +195,7 @@
     /* set a timeout to make sure all the above elements are created before
        the object is initialized. */
     setTimeout(function() {
-        anim3ec2fa44134441beb58b8764848ff519 = new Animation(frames, img_id, slider_id, 142,
+        anim7332b0ee15494480b76d2d1e63cb3089 = new Animation(frames, img_id, slider_id, 142,
                                  loop_select_id);
     }, 0);
   })()
