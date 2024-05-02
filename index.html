@@ -1,3 +1,27 @@
+
+<style>
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    border: 1px solid black;
+    text-align: left;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+thead th {
+    border-bottom: 3px double black; /* Double barre horizontale */
+}
+
+tr:nth-child(even) {background-color: #f9f9f9;}
+</style>
+
 <table>
 <thead>
 <tr><th>Coureur</th><th>Sprinteur</th><th>Rouleur</th><th>Flandrien</th><th>Puncheur</th><th>Grimpeur</th><th>Equipier</th><th>Kuurne-Bruxelles-Kuurne</th><th>Forme du jour sur étape Kuurne-Bruxelles-Kuurne</th><th>Strade Bianche</th><th>Forme du jour sur étape Strade Bianche</th><th>MSR</th><th>Forme du jour sur étape MSR</th><th>Bruges</th><th>Forme du jour sur étape Bruges</th><th>Grand Prix E3</th><th>Forme du jour sur étape Grand Prix E3</th><th>Gent-Wevelgem</th><th>Forme du jour sur étape Gent-Wevelgem</th><th>A travers la Flandres</th><th>Forme du jour sur étape A travers la Flandres</th><th>Ronde</th><th>Forme du jour sur étape Ronde</th><th>Paris-Roubaix</th><th>Forme du jour sur étape Paris-Roubaix</th><th>Flèche Brabançonne</th><th>Forme du jour sur étape Flèche Brabançonne</th><th>Amstel Gold Race</th><th>Forme du jour sur étape Amstel Gold Race</th><th>Flèche Wallonne</th><th>Forme du jour sur étape Flèche Wallonne</th><th>Liège-Bastogne-Liège</th><th>Forme du jour sur étape Liège-Bastogne-Liège</th><th>Classement Het Nieuwsblad</th><th>Classement général après Het Nieuwsblad</th><th>Classement Kuurne-Bruxelles-Kuurne</th><th>Classement général après Kuurne-Bruxelles-Kuurne</th><th>Classement Strade Bianche</th><th>Classement général après Strade Bianche</th><th>Classement MSR</th><th>Classement général après MSR</th><th>Classement Bruges</th><th>Classement général après Bruges</th><th>Classement Grand Prix E3</th><th>Classement général après Grand Prix E3</th><th>Classement Gent-Wevelgem</th><th>Classement général après Gent-Wevelgem</th><th>Classement A travers la Flandres</th><th>Classement général après A travers la Flandres</th><th>Classement Ronde</th><th>Classement général après Ronde</th><th>Classement Paris-Roubaix</th><th>Classement général après Paris-Roubaix</th><th>Classement Flèche Brabançonne</th><th>Classement général après Flèche Brabançonne</th><th>Classement Amstel Gold Race</th><th>Classement général après Amstel Gold Race</th><th>Classement Flèche Wallonne</th><th>Classement général après Flèche Wallonne</th><th>Classement Liège-Bastogne-Liège</th><th>Classement général après Liège-Bastogne-Liège</th></tr>
@@ -50,3 +74,47 @@
 <tr><td>Laurent La Lanterne</td><td>5</td><td>5</td><td>5</td><td>5</td><td>5</td><td>Het Nieuwsblad,Kuurne - Bruxelles - Kuurne,Strade Bianche,MSR,Bruges,Grand Prix E3,Gand - Wevelgem,A travers la Flandres,Ronde,Paris - Roubaix,Flèche Brabançonne,Amstel Gold Race,Flèche Wallonne,Liège - Bastogne - Liège</td><td>35.7</td><td>-0.8</td><td>92.7</td><td>4.2</td><td>51.2</td><td>0.9</td><td>26.5</td><td>-1.9</td><td>32.3</td><td>-1.1</td><td>20.1</td><td>-2.5</td><td>46.6</td><td>0.8</td><td>39.1</td><td>-0.6</td><td>35.3</td><td>-0.7</td><td>10.3</td><td>-3.7</td><td>2.4</td><td>-4.7</td><td>65.3</td><td>3.1</td><td>11.6</td><td>-3.6</td><td>0</td><td>0</td><td>0</td><td>0</td><td>3</td><td>3</td><td>5</td><td>8</td><td>0</td><td>8</td><td>0</td><td>8</td><td>0</td><td>8</td><td>0</td><td>8</td><td>5</td><td>13</td><td>5</td><td>18</td><td>0</td><td>18</td><td>0</td><td>18</td><td>3</td><td>21</td><td>5</td><td>26</td></tr>
 </tbody>
 </table>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('th').forEach(headerCell => {
+        headerCell.addEventListener('click', () => {
+            const tableElement = headerCell.parentElement.parentElement.parentElement;
+            const headerIndex = Array.prototype.indexOf.call(headerCell.parentElement.children, headerCell);
+            const currentIsAscending = headerCell.classList.contains('th-sort-asc');
+            
+            sortTableByColumn(tableElement, headerIndex, !currentIsAscending);
+        });
+    });
+    
+    function sortTableByColumn(table, column, asc = true) {
+        const dirModifier = asc ? 1 : -1;
+        const tBody = table.tBodies[0];
+        const rows = Array.from(tBody.querySelectorAll('tr'));
+        
+        const sortedRows = rows.sort((a, b) => {
+            const aColText = a.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            const bColText = b.querySelector(`td:nth-child(${column + 1})`).textContent.trim();
+            
+            const aColNumber = parseFloat(aColText.replace(/,/g, ''));
+            const bColNumber = parseFloat(bColText.replace(/,/g, ''));
+            
+            if (!isNaN(aColNumber) && !isNaN(bColNumber)) {
+                return (aColNumber - bColNumber) * dirModifier;
+            }
+            
+            return aColText > bColText ? (1 * dirModifier) : (-1 * dirModifier);
+        });
+        
+        while (tBody.firstChild) {
+            tBody.removeChild(tBody.firstChild);
+        }
+        
+        tBody.append(...sortedRows);
+        
+        table.querySelectorAll('th').forEach(th => th.classList.remove('th-sort-asc', 'th-sort-desc'));
+        table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-asc', asc);
+        table.querySelector(`th:nth-child(${column + 1})`).classList.toggle('th-sort-desc', !asc);
+    }
+});
+</script>
